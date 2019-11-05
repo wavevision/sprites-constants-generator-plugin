@@ -61,9 +61,7 @@ class Generator {
     const constants: Array<{ name: string; value: string }> = [];
     $content('svg defs symbol').each(
       (index: number, element: CheerioElement) => {
-        const value = $(element)
-          .attr('id')
-          .replace(`${baseName}-`, '');
+        const value = $(element).attr('id');
         const name = value.replace(/-/g, '_').toUpperCase();
         constants.push({ name, value });
       },
