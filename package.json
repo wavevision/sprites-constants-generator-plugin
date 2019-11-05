@@ -1,6 +1,6 @@
 {
   "name": "@wavevision/sprites-constants-generator-plugin",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Webpack plugin to generate PHP constants from SVG sprite symbol IDs.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
