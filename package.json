@@ -56,7 +56,7 @@
     "postversion:publish": "yarn publish --access public --new-version $npm_package_version",
     "postversion:push": "git push",
     "postversion:push:tags": "yarn postversion:push --tags",
-    "prettier": "prettier '**/*.{json,ts}' --check",
+    "prettier": "prettier '**/*.ts' --check",
     "prettier:fix": "yarn prettier --write",
     "prepare": "npm run build",
     "preversion": "run-s fix build",
