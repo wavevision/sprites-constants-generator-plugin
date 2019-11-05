@@ -88,11 +88,11 @@ Absolute path to directory in which the generated classes will be put.
 
 ### `replace?: (sprite: string) => RegExp | string`
 
-Optional function whose return value will be replaced with empty string in constant name. This is useful if you want to omit something in the name. 
+Optional function whose return value will be replaced with empty string in constant name. This is useful if you want to omit something in the name.
 
 #### Example
 
-You can see in our webpack config we set `symbolId: '[folder]-[name]'`. For images in `icons` folder, that will output `icons.svg` sprite in which each symbol will have `icons-<image>` ID. When generating the constants class this will result in duplicate `ICONS` prefix so you will use the constant as `Icons::ICONS_<image>`. If you want to omit that duplicate, use the function as shown in example, so the result will be `Icons::<image>`.
+You can see in our webpack config we set `symbolId: '[folder]-[name]'` and `spriteFilename` to use images directory name as sprite name. For images in `icons` folder, that will output `icons.svg` sprite in which each symbol will have `icons-<image>` ID. When generating the constants class this will result in duplicate `ICONS` prefix so you will use the constant as `Icons::ICONS_<image>`. If you want to omit that duplicate, use the function as shown in example, so the result will be `Icons::<image>`.
 
 ### `useStaticClass?: boolean`
 
