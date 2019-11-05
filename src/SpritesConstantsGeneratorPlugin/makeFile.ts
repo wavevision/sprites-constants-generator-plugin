@@ -17,9 +17,9 @@ const makeFile = async (
   constants: Array<{ name: string; value: string }>,
   options: Options,
 ): Promise<void> => {
-  const { namespace, useStaticClass, useStrictTypes } = options;
+  const { namespace, output, useStaticClass, useStrictTypes } = options;
   fs.writeFileSync(
-    path.resolve(options.output, `${className}.php`),
+    path.resolve(output, `${className}.php`),
     template({
       className,
       constants,
