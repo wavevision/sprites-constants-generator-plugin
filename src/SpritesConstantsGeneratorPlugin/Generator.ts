@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
-import { basename, join } from 'path';
+import { basename, resolve as resolvePath } from 'path';
+import { resolve as resolveUrl } from 'url';
 
 import $ from 'cheerio';
 
@@ -19,9 +20,9 @@ class Generator {
 
   private readonly pathManager: PathManager;
 
-  public async run(): Promise<void> {
+  public readonly run = (): void => {
     logStart('🧩', 'SVG sprites constants generator');
-    await makeFile(
+    makeFile(
       'Sprites',
       this.options.sprites.map(s => {
         const value = this.getSpriteName(s);
@@ -30,24 +31,26 @@ class Generator {
       this.options,
     );
     this.options.sprites.forEach(this.makeSpriteFile);
-  }
+  };
 
   private readonly getSpriteName = (sprite: string): string =>
     basename(sprite, '.svg');
 
-  private async getSpriteContent(sprite: string): Promise<string | void> {
+  private readonly getSpriteContent = async (
+    sprite: string,
+  ): Promise<string | void> => {
     try {
-      const path = join(this.pathManager.getOutputPath(), sprite);
+      const path = this.pathManager.getOutputPath();
       if (this.pathManager.isDevServer()) {
-        return await fetch(path);
+        return await fetch(resolveUrl(path, sprite));
       }
-      return readFileSync(path).toString();
+      return readFileSync(resolvePath(path, sprite)).toString();
     } catch (e) {
       logError(e);
     }
-  }
+  };
 
-  private async makeSpriteFile(sprite: string): Promise<void> {
+  private readonly makeSpriteFile = async (sprite: string): Promise<void> => {
     const content = await this.getSpriteContent(sprite);
     if (!content) {
       return logError(`Unable to get content of sprite "${sprite}".`);
@@ -66,7 +69,7 @@ class Generator {
       },
     );
     await makeFile(className, constants, this.options);
-  }
+  };
 }
 
 export default Generator;

@@ -9,7 +9,7 @@ class PathManager {
 
   private readonly configuration: webpack.Configuration;
 
-  public getOutputPath(): string {
+  public readonly getOutputPath = (): string => {
     const { output, devServer } = this.configuration;
     if (devServer) {
       const { publicPath } = devServer;
@@ -25,11 +25,10 @@ class PathManager {
       return output.path;
     }
     throw new Error('Unable to get webpack output path.');
-  }
+  };
 
-  public isDevServer(): boolean {
-    return this.configuration.devServer !== undefined;
-  }
+  public readonly isDevServer = (): boolean =>
+    this.configuration.devServer !== undefined;
 }
 
 export default PathManager;

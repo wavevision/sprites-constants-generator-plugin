@@ -12,6 +12,13 @@
     }
   ],
   "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "cheerio": "^1.0.0-rc.3",
+    "handlebars": "^4.5.1",
+    "json-schema": "^0.2.5",
+    "schema-utils": "^2.5.0"
+  },
   "devDependencies": {
     "@types/cheerio": "^0.22.13",
     "@types/node": "^12.12.5",
@@ -26,15 +33,8 @@
     "typescript": "^3.6.4",
     "webpack": "^4.41.2"
   },
-  "dependencies": {
-    "chalk": "^2.4.2",
-    "cheerio": "^1.0.0-rc.3",
-    "handlebars": "^4.5.1",
-    "json-schema": "^0.2.5",
-    "schema-utils": "^2.5.0"
-  },
   "scripts": {
-    "build": "run-s clean ts:build",
+    "build": "NODE_ENV=production run-s clean ts:build copy-template",
     "ci": "run-s ts:check eslint prettier",
     "clean": "rm -rf dist/*",
     "eslint": "eslint src --cache --ext .ts",
@@ -42,6 +42,7 @@
     "fix": "run-s ts:check eslint:fix prettier:fix",
     "prettier": "prettier '**/*.{json,ts}' --check",
     "prettier:fix": "yarn prettier --write",
+    "copy-template": "cp src/template.hbs dist",
     "ts": "tsc",
     "ts:build": "yarn ts --build",
     "ts:check": "yarn ts --noEmit"

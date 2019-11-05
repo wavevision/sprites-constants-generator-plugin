@@ -9,7 +9,7 @@ namespace {{namespace}};
 class {{className}}
 {
 
-	use StaticClass;
+	{{#if useStaticClass}}use StaticClass;{{/if}}
 
 {{#each constants}}
 	public const {{this.name}} = '{{this.value}}';

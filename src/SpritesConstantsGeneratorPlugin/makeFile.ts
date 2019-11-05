@@ -9,7 +9,7 @@ import { Options } from './types';
 const declare = '<?php declare (strict_types = 1);';
 
 const template = compile(
-  fs.readFileSync(path.resolve(__dirname, 'template.hbs')).toString(),
+  fs.readFileSync(path.resolve(__dirname, '..', 'template.hbs')).toString(),
 );
 
 const makeFile = async (

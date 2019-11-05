@@ -8,9 +8,8 @@ import { Options } from './types';
 
 const NAME = 'SpritesConstantsGeneratorPlugin';
 
-class SpritesConstantsGeneratorPlugin extends webpack.Plugin {
+class SpritesConstantsGeneratorPlugin {
   public constructor(options: Options) {
-    super();
     this.options = { ...this.defaults, ...options };
     validate(schema, this.options, { name: NAME });
   }
@@ -24,19 +23,19 @@ class SpritesConstantsGeneratorPlugin extends webpack.Plugin {
 
   private generator: Generator;
 
-  public apply(compiler: webpack.Compiler): void {
-    compiler.hooks.afterEmit.tap(NAME, this.run);
-  }
+  public readonly apply = (compiler: webpack.Compiler): void => {
+    compiler.hooks.done.tap(NAME, this.run);
+  };
 
-  private run(compilation: webpack.compilation.Compilation): void {
+  private readonly run = (stats: webpack.Stats): void => {
     if (!this.generator) {
       this.generator = new Generator(
         this.options,
-        new PathManager(compilation),
+        new PathManager(stats.compilation),
       );
     }
-    this.generator.run();
-  }
+    setTimeout(this.generator.run);
+  };
 }
 
 export default SpritesConstantsGeneratorPlugin;
