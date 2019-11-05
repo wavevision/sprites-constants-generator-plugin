@@ -41,8 +41,13 @@
     "@wavevision/coding-standard": "^1.1.11",
     "eslint": "^6.6.0",
     "npm-run-all": "^4.1.5",
+    "svg-sprite-loader": "^4.1.6",
     "typescript": "^3.6.4",
     "webpack": "^4.41.2"
+  },
+  "peerDependencies": {
+    "svg-sprite-loader": "^4.1.6",
+    "svgxuse": "^1.2.6"
   },
   "scripts": {
     "build": "NODE_ENV=production run-s clean ts:build template",
