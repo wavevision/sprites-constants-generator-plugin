@@ -64,6 +64,7 @@ export default {
     new SpritesConstantsGeneratorPlugin({
       namespace: 'App\\UI\\Sprites',
       output: resolve(__dirname, '..', 'src', 'App', 'UI', 'Sprites'),
+      replace: sprite => `${sprite}-`,
       sprites: ['images/<spriteName>.svg'],
     }),
   ],

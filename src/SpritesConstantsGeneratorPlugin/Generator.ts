@@ -62,7 +62,11 @@ class Generator {
     $content('svg defs symbol').each(
       (index: number, element: CheerioElement) => {
         const value = $(element).attr('id');
-        const name = value.replace(/-/g, '_').toUpperCase();
+        let name = value;
+        if (typeof this.options.replace === 'function') {
+          name = name.replace(this.options.replace(baseName), '');
+        }
+        name = name.replace(/-/g, '_').toUpperCase();
         constants.push({ name, value });
       },
     );

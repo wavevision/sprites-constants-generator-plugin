@@ -12,6 +12,12 @@ const schema = {
         'Absolute path to target directory where the classes should be put.',
       type: 'string',
     },
+    replace: {
+      default: undefined,
+      description:
+        'Function returning pattern to replace with empty string in constant name.',
+      instanceOf: 'Function',
+    },
     sprites: {
       description:
         'Source SVG sprites (paths relative to webpack output directory).',
