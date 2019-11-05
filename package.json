@@ -5,6 +5,7 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
+  "files": ["dist"],
   "author": "Wavevision s.r.o. <info@wavevision.com>",
   "contributors": [
     {
