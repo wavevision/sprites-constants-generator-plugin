@@ -15,4 +15,4 @@ const loader = (source: string): string =>
       .join(delimiter),
   );
 
-export default loader;
+module.exports = loader;

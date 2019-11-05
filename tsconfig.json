@@ -4,7 +4,9 @@
     "allowJs": false,
     "declaration": true,
     "declarationDir": "dist/types",
+    "module": "commonjs",
     "noEmit": false,
+    "outDir": "dist",
     "resolveJsonModule": false,
     "target": "es5"
   },
