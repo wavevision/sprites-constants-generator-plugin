@@ -1,0 +1,49 @@
+{
+  "name": "@wavevision/sprites-constants-generator-plugin",
+  "version": "1.0.0",
+  "description": "Webpack plugin to generate PHP constants from SVG sprite symbol IDs.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Wavevision s.r.o. <info@wavevision.com>",
+  "contributors": [
+    {
+      "name": "Vít Rozsíval",
+      "email": "vit@wavevision.com"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/cheerio": "^0.22.13",
+    "@types/node": "^12.12.5",
+    "@types/schema-utils": "^2.4.0",
+    "@types/webpack": "^4.39.8",
+    "@types/webpack-dev-server": "^3.4.0",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "@wavevision/coding-standard": "^1.1.11",
+    "eslint": "^6.6.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^3.6.4",
+    "webpack": "^4.41.2"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "cheerio": "^1.0.0-rc.3",
+    "handlebars": "^4.5.1",
+    "json-schema": "^0.2.5",
+    "schema-utils": "^2.5.0"
+  },
+  "scripts": {
+    "build": "run-s clean ts:build",
+    "ci": "run-s ts:check eslint prettier",
+    "clean": "rm -rf dist/*",
+    "eslint": "eslint src --cache --ext .ts",
+    "eslint:fix": "yarn eslint --fix",
+    "fix": "run-s ts:check eslint:fix prettier:fix",
+    "prettier": "prettier '**/*.{json,ts}' --check",
+    "prettier:fix": "yarn prettier --write",
+    "ts": "tsc",
+    "ts:build": "yarn ts --build",
+    "ts:check": "yarn ts --noEmit"
+  }
+}

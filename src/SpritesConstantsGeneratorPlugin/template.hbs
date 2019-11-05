@@ -1,0 +1,18 @@
+{{#if useStrictTypes}}
+{{{declare}}}
+
+{{/if}}
+namespace {{namespace}};
+
+{{#if useStaticClass}}use Nette\StaticClass;{{/if}}
+
+class {{className}}
+{
+
+	use StaticClass;
+
+{{#each constants}}
+	public const {{this.name}} = '{{this.value}}';
+
+{{/each}}
+}

@@ -1,0 +1,13 @@
+{
+  "extends": "@wavevision/coding-standard/ts/tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "declaration": true,
+    "module": "umd",
+    "noEmit": false,
+    "outDir": "dist",
+    "resolveJsonModule": false,
+    "target": "es5"
+  },
+  "include": ["./src/**/*"]
+}
