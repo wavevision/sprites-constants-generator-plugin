@@ -3,7 +3,7 @@
   "version": "0.5.1",
   "description": "Webpack plugin to generate PHP constants from SVG sprite symbol IDs.",
   "main": "dist/index.js",
-  "types": "dist/types",
+  "types": "dist",
   "files": [
     "dist"
   ],
