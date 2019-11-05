@@ -47,15 +47,14 @@ export default {
             loader: 'svg-sprite-loader',
             options: {
               extract: true,
-              runtimeGenerator: require.resolve(
-                '@wavevision/sprites-constants-generator-plugin/dist/runtimeGenerator',
-              ),
+              runtimeGenerator:
+                SpritesConstantsGeneratorPlugin.runtimeGenerator,
               spriteFilename: pathname =>
                 `images/${basename(dirname(pathname))}.svg`,
               symbolId: '[folder]-[name]',
             },
           },
-          '@wavevision/sprites-constants-generator-plugin/dist/loader',
+          SpritesConstantsGeneratorPlugin.loader,
         ],
       },
     ],

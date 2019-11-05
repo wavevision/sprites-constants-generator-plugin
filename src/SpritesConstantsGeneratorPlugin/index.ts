@@ -1,3 +1,5 @@
+import { resolve } from 'path';
+
 import validate from 'schema-utils';
 import * as webpack from 'webpack';
 
@@ -6,6 +8,7 @@ import PathManager from './PathManager';
 import schema from './schema';
 import { Options } from './types';
 
+const DIST = resolve(__dirname, '..', '..', 'dist');
 const NAME = 'SpritesConstantsGeneratorPlugin';
 
 class SpritesConstantsGeneratorPlugin {
@@ -13,6 +16,10 @@ class SpritesConstantsGeneratorPlugin {
     this.options = { ...this.defaults, ...options };
     validate(schema, this.options, { name: NAME });
   }
+
+  public static loader = `${DIST}/loader`;
+
+  public static runtimeGenerator = `${DIST}/runtimeGenerator`;
 
   private readonly defaults: Partial<Options> = {
     useStaticClass: true,
