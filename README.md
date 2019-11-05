@@ -35,6 +35,9 @@ import { basename, dirname, resolve } from 'path';
 
 import SpritesConstantsGeneratorPlugin from '@wavevision/sprites-constants-generator-plugin';
 
+const images = 'images';
+const sprites = ['icons', 'pictograms'];
+
 export default {
   // configure entries and output
   // ...
@@ -45,12 +48,13 @@ export default {
         use: [
           {
             loader: 'svg-sprite-loader',
+            include: sprites.map(s => resolve(__dirname, 'src', images, s)),
             options: {
               extract: true,
               runtimeGenerator:
                 SpritesConstantsGeneratorPlugin.runtimeGenerator,
               spriteFilename: pathname =>
-                `images/${basename(dirname(pathname))}.svg`,
+                `${images}/${basename(dirname(pathname))}.svg`,
               symbolId: '[folder]-[name]',
             },
           },
@@ -64,7 +68,7 @@ export default {
       namespace: 'App\\UI\\Sprites',
       output: resolve(__dirname, '..', 'src', 'App', 'UI', 'Sprites'),
       replace: sprite => `${sprite}-`,
-      sprites: ['images/<spriteName>.svg'],
+      sprites: sprites.map(s => `${images}/${s}.svg`),
     }),
   ],
 };
@@ -91,7 +95,11 @@ Optional function whose return value will be replaced with empty string in const
 
 #### Example
 
-You can see in our webpack config we set `symbolId: '[folder]-[name]'` and `spriteFilename` to use images directory name as sprite name. For images in `icons` folder, that will output `icons.svg` sprite in which each symbol will have `icons-<image>` ID. When generating the constants class this will result in duplicate `ICONS` prefix so you will use the constant as `Icons::ICONS_<image>`. If you want to omit that duplicate, use the function as shown in example, so the result will be `Icons::<image>`.
+You can see in our webpack config we set `symbolId: '[folder]-[name]'` and `spriteFilename` to use images directory name as sprite name. For images in `icons` folder, that will output `icons.svg` sprite in which each symbol will have `icons-<image>` ID. When generating the constants class this will result in duplicate `ICONS` prefix so you will use the constant as `Icons::ICONS_<image>`. If you want to omit that duplicate, use the function as shown in the example, so the result will be `Icons::<image>`.
+
+### `sprites: string[]`
+
+List of sprite paths relative to webpack output path.
 
 ### `useStaticClass?: boolean`
 
@@ -99,4 +107,4 @@ If `true`, the generated classes will use [`Nette\StaticClass`](https://api.nett
 
 ### `useStrictTypes?: boolean`
 
-If `true`, the generated classes will have strict types mode declare. **This option is enabled by default.**
+If `true`, the generated classes will have strict types declared. **This option is enabled by default.**
