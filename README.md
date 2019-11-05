@@ -2,7 +2,7 @@
 
 # Wavevision Sprites Constants Generator Plugin
 
-Webpack 4 plugin to generate PHP constants from SVG sprite symbol IDs.
+Webpack 4 plugin to generate PHP constants from SVG sprite symbol IDs based on [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader#runtime-generator) output.
 
 ## Package contents
 
