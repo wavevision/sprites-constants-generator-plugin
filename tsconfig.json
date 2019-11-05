@@ -3,7 +3,7 @@
   "compilerOptions": {
     "allowJs": false,
     "declaration": true,
-    "module": "umd",
+    "module": "commonjs",
     "noEmit": false,
     "outDir": "dist",
     "resolveJsonModule": false,
