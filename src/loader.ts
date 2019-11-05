@@ -6,7 +6,7 @@ const replace: [RegExp, string] = [
 
 const makeExport = (source: string): string => `export default ${source}`;
 
-export const loader = (source: string): string =>
+const loader = (source: string): string =>
   makeExport(
     source
       .split(delimiter)
@@ -14,3 +14,5 @@ export const loader = (source: string): string =>
       .map(svg => svg.replace(...replace))
       .join(delimiter),
   );
+
+export default loader;
