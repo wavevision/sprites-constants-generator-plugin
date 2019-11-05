@@ -1,7 +1,6 @@
 {
   "extends": "@wavevision/coding-standard/ts/tsconfig.json",
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "allowJs": false,
     "declaration": true,
     "module": "commonjs",

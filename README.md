@@ -12,8 +12,16 @@ Webpack 4 plugin to generate PHP constants from SVG sprite symbol IDs based on [
 
 ## Installation
 
+Use [Yarn](https://yarnpkg.com)
+
 ```bash
 yarn add --dev @wavevision/sprites-constants-generator-plugin
+```
+
+or [npm](https://npmjs.com)
+
+```bash
+npm install --save-dev @wavevision/sprites-constants-generator-plugin
 ```
 
 > **Note**: It is highly recommended to install and include [svgxuse](https://github.com/Keyamoon/svgxuse) in your bundle.
