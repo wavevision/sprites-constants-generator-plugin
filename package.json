@@ -1,9 +1,8 @@
 {
   "name": "@wavevision/sprites-constants-generator-plugin",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Webpack plugin to generate PHP constants from SVG sprite symbol IDs.",
   "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
   "types": "dist/types/index.d.ts",
   "files": [
     "dist"
@@ -46,7 +45,7 @@
     "webpack": "^4.41.2"
   },
   "scripts": {
-    "build": "NODE_ENV=production run-s clean ts:build:* template:*",
+    "build": "NODE_ENV=production run-s clean ts:build template",
     "ci": "run-s ts:check eslint prettier",
     "clean": "rm -rf dist/*",
     "eslint": "eslint src --cache --ext .ts",
@@ -61,12 +60,9 @@
     "prettier:fix": "yarn prettier --write",
     "prepare": "npm run build",
     "preversion": "run-s fix build",
-    "template": "cp src/template.hbs",
-    "template:cjs": "yarn template dist/cjs",
-    "template:esm": "yarn template dist/esm",
+    "template": "cp src/template.hbs dist",
     "ts": "tsc",
-    "ts:build:cjs": "yarn ts --module commonjs --outDir dist/cjs",
-    "ts:build:esm": "yarn ts --module es2015 --outDir dist/esm",
+    "ts:build": "yarn ts --build",
     "ts:check": "yarn ts --noEmit"
   }
 }
