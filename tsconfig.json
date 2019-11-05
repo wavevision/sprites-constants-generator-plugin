@@ -3,9 +3,8 @@
   "compilerOptions": {
     "allowJs": false,
     "declaration": true,
-    "module": "commonjs",
+    "declarationDir": "dist/types",
     "noEmit": false,
-    "outDir": "dist",
     "resolveJsonModule": false,
     "target": "es5"
   },
