@@ -82,6 +82,7 @@
     "ts": "tsc",
     "ts:build": "yarn ts --project tsconfig.build.json",
     "ts:check": "yarn ts --noEmit",
-    "webpack": "webpack --config tests/webpack.config.ts"
+    "webpack": "run-s build webpack:build",
+    "webpack:build": "webpack --config tests/webpack.config.ts"
   }
 }
