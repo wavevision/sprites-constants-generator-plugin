@@ -1,6 +1,6 @@
 import { resolve } from 'url';
 
-import * as webpack from 'webpack';
+import webpack from 'webpack';
 
 class PathManager {
   public constructor(compilation: webpack.compilation.Compilation) {

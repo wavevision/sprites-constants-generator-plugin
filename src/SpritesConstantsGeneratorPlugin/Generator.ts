@@ -26,7 +26,7 @@ class Generator {
         'Sprites',
         this.options.sprites.map(s => {
           const value = this.getSpriteName(s);
-          return { name: value.toUpperCase(), value };
+          return { name: this.makeConstantName(value), value };
         }),
         this.options,
       ),
@@ -50,11 +50,18 @@ class Generator {
     return readFileSync(resolvePath(path, sprite)).toString();
   };
 
+  private readonly handleReplace = (sprite: string, value: string): string => {
+    if (typeof this.options.replace === 'function') {
+      return value.replace(this.options.replace(sprite), '');
+    }
+    return value;
+  };
+
+  private readonly makeConstantName = (value: string): string =>
+    value.replace(/-/g, '_').toUpperCase();
+
   private readonly makeSpriteFile = async (sprite: string): Promise<string> => {
     const content = await this.getSpriteContent(sprite);
-    if (!content) {
-      throw new Error(`Unable to get content of sprite "${sprite}".`);
-    }
     const $content = $.load(content);
     const baseName = this.getSpriteName(sprite);
     const className = baseName.charAt(0).toUpperCase() + baseName.slice(1);
@@ -62,12 +69,10 @@ class Generator {
     $content('svg defs symbol').each(
       (index: number, element: CheerioElement) => {
         const value = $(element).attr('id');
-        let name = value;
-        if (typeof this.options.replace === 'function') {
-          name = name.replace(this.options.replace(baseName), '');
-        }
-        name = name.replace(/-/g, '_').toUpperCase();
-        constants.push({ name, value });
+        constants.push({
+          name: this.makeConstantName(this.handleReplace(baseName, value)),
+          value,
+        });
       },
     );
     return makeFile(className, constants, this.options);

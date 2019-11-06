@@ -1,11 +1,11 @@
-import { basename, dirname, resolve } from 'path';
+import { basename, dirname } from 'path';
 
 import SVGSpriteLoaderPlugin from 'svg-sprite-loader/plugin';
 import { Configuration } from 'webpack';
 
 import SpritesConstantsGeneratorPlugin from '../src/SpritesConstantsGeneratorPlugin';
 
-import { OUTPUT_PATH, SPRITES_DIR } from './constants';
+import { ENTRY, OUTPUT_PATH, SPRITES_DIR } from './constants';
 
 const images = 'images';
 const sprites = ['icons'];
@@ -13,7 +13,7 @@ const sprites = ['icons'];
 const config: Configuration = {
   mode: 'production',
   entry: {
-    index: resolve(__dirname, 'assets', 'index.ts'),
+    index: ENTRY,
   },
   output: {
     path: OUTPUT_PATH,

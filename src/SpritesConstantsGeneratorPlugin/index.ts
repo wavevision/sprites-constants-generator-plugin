@@ -1,7 +1,7 @@
 import { resolve } from 'path';
 
 import validate from 'schema-utils';
-import * as webpack from 'webpack';
+import webpack from 'webpack';
 
 import Generator from './Generator';
 import PathManager from './PathManager';
