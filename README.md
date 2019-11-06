@@ -108,7 +108,7 @@ List of sprite paths relative to webpack output path.
 
 #### `useStaticClass?: boolean`
 
-If `true`, the generated classes will use [`Nette\StaticClass`](https://api.nette.org/3.0/Nette/StaticClass.html) trait. **This option is enabled by default.**
+If `true`, the generated classes will use [`Nette\StaticClass`](https://api.nette.org/Nette/StaticClass.html) trait. **This option is enabled by default.**
 
 #### `useStrictTypes?: boolean`
 
