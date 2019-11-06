@@ -84,32 +84,32 @@ This will output to `src/App/UI/Sprites`:
 - **`Sprites.php`** containing constants with each sprite name
 - for every sprite a **`<SpriteName>.php`** containing constants with each `symbolId` as configured in `svg-sprite-loader`
 
-## Plugin options
+### Plugin options
 
-### `namespace: string`
+#### `namespace: string`
 
 PHP namespace in which the generated classes will reside.
 
-### `output: string`
+#### `output: string`
 
 Absolute path to directory in which the generated classes will be put.
 
-### `replace?: (sprite: string) => RegExp | string`
+#### `replace?: (sprite: string) => RegExp | string`
 
 Optional function whose return value will be replaced with empty string in constant name. This is useful if you want to omit something in the name.
 
-#### Example
+##### Example
 
 You can see in our webpack config we set `symbolId: '[folder]-[name]'` and `spriteFilename` to use images directory name as sprite name. For images in `icons` folder, that will output `icons.svg` sprite in which each symbol will have `icons-<image>` ID. When generating the constants class this will result in duplicate `ICONS` prefix so you will use the constant as `Icons::ICONS_<image>`. If you want to omit that duplicate, use the function as shown in the example, so the result will be `Icons::<image>`.
 
-### `sprites: string[]`
+#### `sprites: string[]`
 
 List of sprite paths relative to webpack output path.
 
-### `useStaticClass?: boolean`
+#### `useStaticClass?: boolean`
 
 If `true`, the generated classes will use [`Nette\StaticClass`](https://api.nette.org/3.0/Nette/StaticClass.html) trait. **This option is enabled by default.**
 
-### `useStrictTypes?: boolean`
+#### `useStrictTypes?: boolean`
 
 If `true`, the generated classes will have strict types declared. **This option is enabled by default.**
