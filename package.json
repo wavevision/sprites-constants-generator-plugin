@@ -81,6 +81,7 @@
     "test:coverage:report": "jest --coverage && cat temp/coverage/lcov.info | coveralls",
     "ts": "tsc",
     "ts:build": "yarn ts --project tsconfig.build.json",
-    "ts:check": "yarn ts --noEmit"
+    "ts:check": "yarn ts --noEmit",
+    "webpack": "webpack --config tests/webpack.config.ts"
   }
 }
