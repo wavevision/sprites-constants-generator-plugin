@@ -9,7 +9,7 @@ Webpack 4 plugin to generate PHP constants from SVG sprite symbol IDs based on [
 
 ## Package contents
 
-- webpack plugin
+- webpack [plugin](#plugin-options)
 - runtime generator for [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader#runtime-generator)
 - loader to de-colorize each SVG with `fill="currentColor"`
 
