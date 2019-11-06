@@ -7,4 +7,4 @@ const runtimeGenerator = ({ symbol }: RuntimeGenerator): string =>
     symbol.request.file,
   )}`;
 
-module.exports = runtimeGenerator;
+export = runtimeGenerator;

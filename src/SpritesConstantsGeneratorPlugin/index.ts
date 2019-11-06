@@ -7,6 +7,7 @@ import Generator from './Generator';
 import PathManager from './PathManager';
 import schema from './schema';
 import { Options } from './types';
+import { logStart, logSuccess } from './utils';
 
 const DIST = resolve(__dirname, '..', '..', 'dist');
 const NAME = 'SpritesConstantsGeneratorPlugin';
@@ -34,14 +35,22 @@ class SpritesConstantsGeneratorPlugin {
     compiler.hooks.done.tap(NAME, this.run);
   };
 
-  private readonly run = (stats: webpack.Stats): void => {
+  private readonly run = async ({
+    compilation,
+  }: webpack.Stats): Promise<void> => {
     if (!this.generator) {
       this.generator = new Generator(
         this.options,
-        new PathManager(stats.compilation),
+        new PathManager(compilation),
       );
     }
-    setTimeout(this.generator.run);
+    try {
+      const messages = await this.generator.run();
+      logStart('🧩', 'SVG sprites constants generator');
+      messages.forEach(logSuccess);
+    } catch (e) {
+      compilation.errors.push(e);
+    }
   };
 }
 

@@ -7,7 +7,6 @@ import $ from 'cheerio';
 import PathManager from './PathManager';
 import fetch from './fetch';
 import makeFile from './makeFile';
-import { logStart, logError } from './utils';
 import { Options } from './types';
 
 class Generator {
@@ -20,17 +19,22 @@ class Generator {
 
   private readonly pathManager: PathManager;
 
-  public readonly run = (): void => {
-    logStart('🧩', 'SVG sprites constants generator');
-    makeFile(
-      'Sprites',
-      this.options.sprites.map(s => {
-        const value = this.getSpriteName(s);
-        return { name: value.toUpperCase(), value };
-      }),
-      this.options,
+  public readonly run = async (): Promise<string[]> => {
+    const messages: Array<Promise<string>> = [];
+    messages.push(
+      makeFile(
+        'Sprites',
+        this.options.sprites.map(s => {
+          const value = this.getSpriteName(s);
+          return { name: value.toUpperCase(), value };
+        }),
+        this.options,
+      ),
     );
-    this.options.sprites.forEach(this.makeSpriteFile);
+    for (const sprite of this.options.sprites) {
+      messages.push(this.makeSpriteFile(sprite));
+    }
+    return Promise.all(messages);
   };
 
   private readonly getSpriteName = (sprite: string): string =>
@@ -38,22 +42,18 @@ class Generator {
 
   private readonly getSpriteContent = async (
     sprite: string,
-  ): Promise<string | void> => {
-    try {
-      const path = this.pathManager.getOutputPath();
-      if (this.pathManager.isDevServer()) {
-        return await fetch(resolveUrl(path, sprite));
-      }
-      return readFileSync(resolvePath(path, sprite)).toString();
-    } catch (e) {
-      logError(e);
+  ): Promise<string> => {
+    const path = this.pathManager.getOutputPath();
+    if (this.pathManager.isDevServer()) {
+      return fetch(resolveUrl(path, sprite));
     }
+    return readFileSync(resolvePath(path, sprite)).toString();
   };
 
-  private readonly makeSpriteFile = async (sprite: string): Promise<void> => {
+  private readonly makeSpriteFile = async (sprite: string): Promise<string> => {
     const content = await this.getSpriteContent(sprite);
     if (!content) {
-      return logError(`Unable to get content of sprite "${sprite}".`);
+      throw new Error(`Unable to get content of sprite "${sprite}".`);
     }
     const $content = $.load(content);
     const baseName = this.getSpriteName(sprite);
@@ -70,7 +70,7 @@ class Generator {
         constants.push({ name, value });
       },
     );
-    await makeFile(className, constants, this.options);
+    return makeFile(className, constants, this.options);
   };
 }
 

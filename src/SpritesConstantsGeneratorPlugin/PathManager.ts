@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { resolve } from 'url';
 
 import * as webpack from 'webpack';
 
@@ -19,7 +19,7 @@ class PathManager {
       if (publicPath && publicPath.includes(url)) {
         return publicPath;
       }
-      return join(url, publicPath || '/');
+      return resolve(url, publicPath || '/');
     }
     if (output && output.path) {
       return output.path;

@@ -3,11 +3,9 @@ import path from 'path';
 
 import { compile } from 'handlebars';
 
-import { logSuccess } from './utils';
 import { Options } from './types';
 
 const declare = '<?php declare (strict_types = 1);';
-
 const template = compile(
   fs.readFileSync(path.resolve(__dirname, '..', 'template.hbs')).toString(),
 );
@@ -16,8 +14,11 @@ const makeFile = async (
   className: string,
   constants: Array<{ name: string; value: string }>,
   options: Options,
-): Promise<void> => {
+): Promise<string> => {
   const { namespace, output, useStaticClass, useStrictTypes } = options;
+  if (!fs.existsSync(output)) {
+    fs.mkdirSync(output, { recursive: true });
+  }
   fs.writeFileSync(
     path.resolve(output, `${className}.php`),
     template({
@@ -30,7 +31,7 @@ const makeFile = async (
     }),
     'UTF8',
   );
-  logSuccess(`${namespace}\\${className} created`);
+  return `${namespace}\\${className} created`;
 };
 
 export default makeFile;

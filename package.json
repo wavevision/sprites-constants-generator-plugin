@@ -32,18 +32,28 @@
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.13",
+    "@types/jest": "^24.0.22",
     "@types/node": "^12.12.5",
     "@types/schema-utils": "^2.4.0",
+    "@types/svg-sprite-loader": "^3.9.1",
     "@types/webpack": "^4.39.8",
     "@types/webpack-dev-server": "^3.4.0",
+    "@types/webpack-env": "^1.14.1",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
     "@typescript-eslint/parser": "^2.6.1",
     "@wavevision/coding-standard": "^1.1.11",
+    "coveralls": "^3.0.7",
     "eslint": "^6.6.0",
+    "jest": "^24.9.0",
+    "nock": "^11.7.0",
     "npm-run-all": "^4.1.5",
     "svg-sprite-loader": "^4.1.6",
+    "ts-jest": "^24.1.0",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.4.1",
     "typescript": "^3.6.4",
-    "webpack": "^4.41.2"
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "peerDependencies": {
     "svg-sprite-loader": "^4.1.6",
@@ -51,11 +61,11 @@
   },
   "scripts": {
     "build": "NODE_ENV=production run-s clean ts:build template",
-    "ci": "run-s ts:check eslint prettier",
+    "ci": "run-s ts:check eslint prettier test:coverage:report",
     "clean": "rm -rf dist/*",
-    "eslint": "eslint src --cache --ext .ts",
+    "eslint": "eslint src tests --cache --ext .ts",
     "eslint:fix": "yarn eslint --fix",
-    "fix": "run-s ts:check eslint:fix prettier:fix",
+    "fix": "run-s ts:check eslint:fix prettier:fix test",
     "postversion": "run-s postversion:push:tags postversion:publish postversion:push postversion:echo",
     "postversion:echo": "echo \"Successfully released version $npm_package_version!\"",
     "postversion:publish": "yarn publish --access public --new-version $npm_package_version",
@@ -66,8 +76,11 @@
     "prepare": "npm run build",
     "preversion": "run-s fix build",
     "template": "cp src/template.hbs dist",
+    "test": "jest",
+    "test:coverage": "jest --coverage || true",
+    "test:coverage:report": "jest --coverage && cat temp/coverage/lcov.info | coveralls --verbose",
     "ts": "tsc",
-    "ts:build": "yarn ts --build",
+    "ts:build": "yarn ts --project tsconfig.build.json",
     "ts:check": "yarn ts --noEmit"
   }
 }

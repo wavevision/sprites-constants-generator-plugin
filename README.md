@@ -34,6 +34,7 @@ Assuming your sprites are loaded from `<entry>/images/<spriteName>/<image>.svg` 
 import { basename, dirname, resolve } from 'path';
 
 import SpritesConstantsGeneratorPlugin from '@wavevision/sprites-constants-generator-plugin';
+import SVGSpriteLoaderPlugin from 'svg-sprite-loader/plugin';
 
 const images = 'images';
 const sprites = ['icons', 'pictograms'];
@@ -45,10 +46,10 @@ export default {
     rules: [
       {
         test: /\.svg$/,
+        include: sprites.map(s => resolve(__dirname, 'src', images, s)),
         use: [
           {
             loader: 'svg-sprite-loader',
-            include: sprites.map(s => resolve(__dirname, 'src', images, s)),
             options: {
               extract: true,
               runtimeGenerator:
@@ -64,6 +65,7 @@ export default {
     ],
   },
   plugins: [
+    new SVGSpriteLoaderPlugin({ plainSprite: true }),
     new SpritesConstantsGeneratorPlugin({
       namespace: 'App\\UI\\Sprites',
       output: resolve(__dirname, 'src', 'App', 'UI', 'Sprites'),
