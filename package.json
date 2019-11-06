@@ -78,7 +78,7 @@
     "template": "cp src/template.hbs dist",
     "test": "jest",
     "test:coverage": "jest --coverage || true",
-    "test:coverage:report": "jest --coverage && cat temp/coverage/lcov.info | coveralls --verbose",
+    "test:coverage:report": "jest --coverage && cat temp/coverage/lcov.info | coveralls",
     "ts": "tsc",
     "ts:build": "yarn ts --project tsconfig.build.json",
     "ts:check": "yarn ts --noEmit"
