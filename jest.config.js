@@ -4,6 +4,7 @@ module.exports = {
       isolatedModules: true,
     },
   },
+  testEnvironment: 'node',
   testMatch: ['<rootDir>/tests/**/*.test.ts'],
   testPathIgnorePatterns: ['<rootDir>/node_modules'],
   moduleDirectories: ['node_modules', 'src'],

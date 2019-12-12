@@ -69,6 +69,9 @@ class Generator {
     $content('svg defs symbol').each(
       (index: number, element: CheerioElement) => {
         const value = $(element).attr('id');
+        if (!value) {
+          throw new Error('SVG symbol ID is missing.');
+        }
         constants.push({
           name: this.makeConstantName(this.handleReplace(baseName, value)),
           value,

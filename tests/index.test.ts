@@ -23,14 +23,15 @@ describe('SpritesConstantsGeneratorPlugin', () => {
       rmdirSync(path, { recursive: true }),
     );
   });
-  it('compiles webpack assets', done => {
-    const compiler = webpack(config);
-    compiler.run((err, stats) => {
-      expect(err).toBeNull();
-      expect(stats.toJson().assets).toBeDefined();
-      done();
-    });
-  });
+  it('compiles webpack assets', () =>
+    new Promise(done => {
+      const compiler = webpack(config);
+      compiler.run((err, stats) => {
+        expect(err).toBeNull();
+        expect(stats.toJson().assets).toBeDefined();
+        done();
+      });
+    }));
   it('generated valid constants classes', () => {
     const iconsPath = resolve(SPRITES_DIR, 'Icons.php');
     const spritesPath = resolve(SPRITES_DIR, 'Sprites.php');

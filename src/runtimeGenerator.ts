@@ -1,10 +1,8 @@
 type RuntimeGenerator = {
-  symbol: { request: { file: string } };
+  symbol: { id: string };
 };
 
 const runtimeGenerator = ({ symbol }: RuntimeGenerator): string =>
-  `export default __webpack_public_path__ + ${JSON.stringify(
-    symbol.request.file,
-  )}`;
+  `export default __webpack_public_path__ + ${JSON.stringify(symbol.id)}`;
 
 export = runtimeGenerator;
