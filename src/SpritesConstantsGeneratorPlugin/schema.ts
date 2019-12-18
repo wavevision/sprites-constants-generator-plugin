@@ -5,7 +5,8 @@ const schema = {
   properties: {
     ignoreErrors: {
       default: false,
-      description: 'Run generator even if there are errors in webpack compilation.',
+      description:
+        'Run generator even if there are errors in webpack compilation.',
       type: 'boolean',
     },
     namespace: {
