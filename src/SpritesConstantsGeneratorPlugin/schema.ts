@@ -3,6 +3,11 @@ import { JSONSchema7 } from 'json-schema';
 const schema = {
   additionalProperties: false,
   properties: {
+    ignoreErrors: {
+      default: false,
+      description: 'Run generator even if there are errors in webpack compilation.',
+      type: 'boolean',
+    },
     namespace: {
       description: 'PHP namespace of the generated class.',
       type: 'string',

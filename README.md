@@ -86,6 +86,10 @@ This will output to `src/App/UI/Sprites`:
 
 ### Plugin options
 
+#### `ignoreErrors?: boolean`
+
+Run generator even if there are errors in webpack compilation. **This option is disabled by default.**
+
 #### `namespace: string`
 
 PHP namespace in which the generated classes will reside.

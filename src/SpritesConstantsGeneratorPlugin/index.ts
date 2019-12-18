@@ -24,6 +24,7 @@ class SpritesConstantsGeneratorPlugin {
   public static runtimeGenerator = `${DIST}/runtimeGenerator`;
 
   private readonly defaults: Partial<Options> = {
+    ignoreErrors: false,
     useStaticClass: true,
     useStrictTypes: true,
   };
@@ -39,6 +40,7 @@ class SpritesConstantsGeneratorPlugin {
   private readonly run = async ({
     compilation,
   }: webpack.Stats): Promise<void> => {
+    if (!this.shouldRun(compilation)) return;
     if (!this.generator) {
       this.generator = new Generator(
         this.options,
@@ -52,6 +54,15 @@ class SpritesConstantsGeneratorPlugin {
     } catch (e) {
       compilation.errors.push(e);
     }
+  };
+
+  private readonly shouldRun = (
+    compilation: webpack.compilation.Compilation,
+  ): boolean => {
+    if (this.options.ignoreErrors === false) {
+      return compilation.errors.length === 0;
+    }
+    return true;
   };
 }
 
