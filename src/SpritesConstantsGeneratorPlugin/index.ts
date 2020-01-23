@@ -8,7 +8,7 @@ import Generator from './Generator';
 import PathManager from './PathManager';
 import schema from './schema';
 import { Options } from './types';
-import { logStart, logSuccess } from './utils';
+import { logError, logStart, logSuccess } from './utils';
 
 const DIST = resolve(__dirname, '..', '..', 'dist');
 const NAME = 'SpritesConstantsGeneratorPlugin';
@@ -34,7 +34,7 @@ class SpritesConstantsGeneratorPlugin {
   private generator: Generator;
 
   public readonly apply = (compiler: webpack.Compiler): void => {
-    compiler.hooks.done.tapPromise(NAME, this.run);
+    compiler.hooks.done.tap(NAME, this.run);
   };
 
   private readonly run = async ({
@@ -47,9 +47,14 @@ class SpritesConstantsGeneratorPlugin {
         new PathManager(compilation),
       );
     }
-    const messages = await this.generator.run();
-    logStart('🧩', 'SVG sprites constants generator');
-    messages.forEach(logSuccess);
+    try {
+      const messages = await this.generator.run();
+      logStart('🧩', 'SVG sprites constants generator');
+      messages.forEach(logSuccess);
+    } catch (e) {
+      compilation.errors.push(e);
+      logError(e, NAME);
+    }
   };
 
   private readonly shouldRun = (
