@@ -40,8 +40,8 @@ const config: Configuration = {
               runtimeGenerator:
                 SpritesConstantsGeneratorPlugin.runtimeGenerator,
               spriteFilename: (pathname: string): string =>
-                `${images}/${basename(dirname(pathname))}.svg`,
-              symbolId: '[folder]-[name]',
+                `${images}/test-${basename(dirname(pathname))}.svg`,
+              symbolId: 'test-[folder]-[name]',
             },
           },
           SpritesConstantsGeneratorPlugin.loader,
@@ -55,7 +55,7 @@ const config: Configuration = {
       namespace: 'App\\Sprites',
       output: SPRITES_DIR,
       replace: sprite => `${sprite}-`,
-      sprites: sprites.map(s => `${images}/${s}.svg`),
+      sprites: sprites.map(s => `${images}/test-${s}.svg`),
     }),
   ],
   resolve: {

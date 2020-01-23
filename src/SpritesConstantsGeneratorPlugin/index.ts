@@ -34,7 +34,7 @@ class SpritesConstantsGeneratorPlugin {
   private generator: Generator;
 
   public readonly apply = (compiler: webpack.Compiler): void => {
-    compiler.hooks.done.tap(NAME, this.run);
+    compiler.hooks.done.tapPromise(NAME, this.run);
   };
 
   private readonly run = async ({
@@ -47,13 +47,9 @@ class SpritesConstantsGeneratorPlugin {
         new PathManager(compilation),
       );
     }
-    try {
-      const messages = await this.generator.run();
-      logStart('🧩', 'SVG sprites constants generator');
-      messages.forEach(logSuccess);
-    } catch (e) {
-      compilation.errors.push(e);
-    }
+    const messages = await this.generator.run();
+    logStart('🧩', 'SVG sprites constants generator');
+    messages.forEach(logSuccess);
   };
 
   private readonly shouldRun = (

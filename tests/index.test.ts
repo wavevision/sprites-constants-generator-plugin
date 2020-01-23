@@ -33,17 +33,17 @@ describe('SpritesConstantsGeneratorPlugin', () => {
       });
     }));
   it('generated valid constants classes', () => {
-    const iconsPath = resolve(SPRITES_DIR, 'Icons.php');
+    const iconsPath = resolve(SPRITES_DIR, 'TestIcons.php');
     const spritesPath = resolve(SPRITES_DIR, 'Sprites.php');
     expect(existsSync(spritesPath)).toBe(true);
     expect(existsSync(iconsPath)).toBe(true);
     const sprites = readFileSync(spritesPath).toString();
-    assertConstant(sprites, 'ICONS', 'icons');
+    assertConstant(sprites, 'TEST_ICONS', 'test-icons');
     assertStaticClass(sprites);
     assertStrictTypes(sprites);
     const icons = readFileSync(iconsPath).toString();
-    assertConstant(icons, 'ACCOUNT', 'icons-account');
-    assertConstant(icons, 'ADD', 'icons-add');
+    assertConstant(icons, 'ACCOUNT', 'test-icons-account');
+    assertConstant(icons, 'ADD', 'test-icons-add');
     assertStaticClass(icons);
     assertStrictTypes(icons);
   });

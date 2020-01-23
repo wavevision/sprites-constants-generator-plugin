@@ -7,6 +7,7 @@ import $ from 'cheerio';
 import PathManager from './PathManager';
 import fetch from './fetch';
 import makeFile from './makeFile';
+import { filterClassName } from './utils';
 import { Options } from './types';
 
 class Generator {
@@ -64,7 +65,7 @@ class Generator {
     const content = await this.getSpriteContent(sprite);
     const $content = $.load(content);
     const baseName = this.getSpriteName(sprite);
-    const className = baseName.charAt(0).toUpperCase() + baseName.slice(1);
+    const className = filterClassName(baseName);
     const constants: Array<{ name: string; value: string }> = [];
     $content('svg defs symbol').each(
       (index: number, element: CheerioElement) => {

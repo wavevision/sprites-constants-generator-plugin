@@ -24,15 +24,18 @@
   },
   "homepage": "https://github.com/wavevision/sprites-constants-generator-plugin",
   "dependencies": {
+    "@wavevision/ts-utils": "^0.3.3",
     "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.3",
     "handlebars": "^4.5.1",
     "json-schema": "^0.2.5",
+    "lodash.camelcase": "^4.3.0",
     "schema-utils": "^2.5.0"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.13",
     "@types/jest": "^24.0.22",
+    "@types/lodash.camelcase": "^4.3.6",
     "@types/node": "^12.12.5",
     "@types/svg-sprite-loader": "^3.9.1",
     "@types/webpack": "^4.39.8",
@@ -73,7 +76,7 @@
     "prettier": "prettier '**/*.ts' --check",
     "prettier:fix": "yarn prettier --write",
     "prepare": "npm run build",
-    "preversion": "run-s fix build",
+    "preversion": "yarn fix",
     "template": "cp src/template.hbs dist",
     "test": "jest",
     "test:coverage": "jest --coverage || true",
