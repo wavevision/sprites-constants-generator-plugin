@@ -49,6 +49,6 @@ describe('SpritesConstantsGeneratorPlugin', () => {
         assertStaticClass(icons);
         assertStrictTypes(icons);
         done();
-      });
+      }, 1000);
     }));
 });
