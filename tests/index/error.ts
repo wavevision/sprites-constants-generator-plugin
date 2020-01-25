@@ -1,8 +1,9 @@
 import webpack from 'webpack';
 
-import { makeConfig } from './webpack.config';
+import { makeConfig } from '../webpack.config';
 
-describe('SpritesConstantsGeneratorPlugin error', () => {
+// eslint-disable-next-line jest/no-export
+export default (): void => {
   it('fails webpack compilation with error', () =>
     new Promise(done => {
       const compiler = webpack(makeConfig(true));
@@ -11,4 +12,4 @@ describe('SpritesConstantsGeneratorPlugin error', () => {
         done();
       });
     }));
-});
+};
