@@ -9,8 +9,9 @@ import { ENTRY, OUTPUT_PATH, SPRITES_DIR } from './constants';
 
 const images = 'images';
 const sprites = ['icons'];
+const test = 'test';
 
-const config: Configuration = {
+export const makeConfig = (withError = false): Configuration => ({
   mode: 'production',
   entry: {
     index: ENTRY,
@@ -40,8 +41,8 @@ const config: Configuration = {
               runtimeGenerator:
                 SpritesConstantsGeneratorPlugin.runtimeGenerator,
               spriteFilename: (pathname: string): string =>
-                `${images}/test-${basename(dirname(pathname))}.svg`,
-              symbolId: 'test-[folder]-[name]',
+                `${images}/${test}-${basename(dirname(pathname))}.svg`,
+              symbolId: `${test}-[folder]-[name]`,
             },
           },
           SpritesConstantsGeneratorPlugin.loader,
@@ -55,12 +56,14 @@ const config: Configuration = {
       namespace: 'App\\Sprites',
       output: SPRITES_DIR,
       replace: sprite => `${sprite}-`,
-      sprites: sprites.map(s => `${images}/test-${s}.svg`),
+      sprites: sprites.map(s =>
+        withError ? `${images}/${s}.svg` : `${images}/${test}-${s}.svg`,
+      ),
     }),
   ],
   resolve: {
     extensions: ['.js', '.ts'],
   },
-};
+});
 
-export default config;
+export default makeConfig();

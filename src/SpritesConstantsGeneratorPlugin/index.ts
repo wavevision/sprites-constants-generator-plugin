@@ -8,7 +8,6 @@ import Generator from './Generator';
 import PathManager from './PathManager';
 import schema from './schema';
 import { Options } from './types';
-import { logError, logStart, logSuccess } from './utils';
 
 const DIST = resolve(__dirname, '..', '..', 'dist');
 const NAME = 'SpritesConstantsGeneratorPlugin';
@@ -33,13 +32,19 @@ class SpritesConstantsGeneratorPlugin {
 
   private generator: Generator;
 
+  private logger: webpack.Logger;
+
   public readonly apply = (compiler: webpack.Compiler): void => {
-    compiler.hooks.done.tap(NAME, this.run);
+    compiler.hooks.thisCompilation.tap(NAME, compilation => {
+      this.logger = compilation.getLogger(NAME);
+    });
+    compiler.hooks.afterEmit.tapAsync(NAME, this.run);
   };
 
-  private readonly run = async ({
-    compilation,
-  }: webpack.Stats): Promise<void> => {
+  private readonly run = async (
+    compilation: webpack.compilation.Compilation,
+    callback: () => void,
+  ): Promise<void> => {
     if (!this.shouldRun(compilation)) return;
     if (!this.generator) {
       this.generator = new Generator(
@@ -48,13 +53,14 @@ class SpritesConstantsGeneratorPlugin {
       );
     }
     try {
+      this.logger.group(NAME);
       const messages = await this.generator.run();
-      logStart('🧩', 'SVG sprites constants generator');
-      messages.forEach(logSuccess);
+      messages.forEach(m => this.logger.info(m));
+      this.logger.groupEnd();
     } catch (e) {
-      compilation.errors.push(e);
-      logError(e, NAME);
+      compilation.errors.push(`${NAME}: ${e.message}`);
     }
+    callback();
   };
 
   private readonly shouldRun = (
