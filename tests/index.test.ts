@@ -6,7 +6,7 @@ import webpack from 'webpack';
 import { makeConfig } from './webpack.config';
 import { OUTPUT_PATH, SPRITES_DIR } from './constants';
 
-jest.setTimeout(10000);
+jest.setTimeout(20000);
 
 const assertConstant = (source: string, name: string, value: string): void =>
   expect(source.includes(`public const ${name} = '${value}';`)).toBe(true);
@@ -49,6 +49,6 @@ describe('SpritesConstantsGeneratorPlugin', () => {
         assertStaticClass(icons);
         assertStrictTypes(icons);
         done();
-      }, 1000);
+      }, 5000);
     }));
 });

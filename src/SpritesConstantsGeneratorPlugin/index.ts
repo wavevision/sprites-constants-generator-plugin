@@ -41,10 +41,10 @@ class SpritesConstantsGeneratorPlugin {
     compiler.hooks.afterEmit.tapAsync(NAME, this.run);
   };
 
-  private readonly run = async (
+  private readonly run = (
     compilation: webpack.compilation.Compilation,
     callback: () => void,
-  ): Promise<void> => {
+  ): void => {
     if (!this.shouldRun(compilation)) return;
     if (!this.generator) {
       this.generator = new Generator(
@@ -52,15 +52,15 @@ class SpritesConstantsGeneratorPlugin {
         new PathManager(compilation),
       );
     }
-    try {
-      this.logger.group(NAME);
-      const messages = await this.generator.run();
-      messages.forEach(m => this.logger.info(m));
-      this.logger.groupEnd();
-    } catch (e) {
-      compilation.errors.push(`${NAME}: ${e.message}`);
-    }
-    callback();
+    this.generator
+      .run()
+      .then(messages => {
+        this.logger.group(NAME);
+        messages.forEach(m => this.logger.info(m));
+        this.logger.groupEnd();
+      })
+      .catch(e => compilation.errors.push(`${NAME}: ${e.message}`))
+      .finally(callback);
   };
 
   private readonly shouldRun = (
