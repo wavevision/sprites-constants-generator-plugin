@@ -1,7 +1,7 @@
 # Wavevision Sprites Constants Generator Plugin
 
 [![Build Status](https://travis-ci.org/wavevision/sprites-constants-generator-plugin.svg?branch=master)](https://travis-ci.org/wavevision/sprites-constants-generator-plugin)
-[![Coverage Status](https://coveralls.io/repos/github/wavevision/sprites-constants-generator-plugin/badge.svg?branch=master&service=github)](https://coveralls.io/github/wavevision/sprites-constants-generator-plugin?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/wavevision/sprites-constants-generator-plugin/badge.svg?branch=master)](https://coveralls.io/github/wavevision/sprites-constants-generator-plugin?branch=master)
 [![npm (scoped)](https://img.shields.io/npm/v/@wavevision/sprites-constants-generator-plugin)](https://www.npmjs.com/package/@wavevision/sprites-constants-generator-plugin)
 [![webpack](https://img.shields.io/badge/webpack-v4.x-blue)](https://github.com/webpack/webpack)
 
