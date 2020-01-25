@@ -1,4 +1,5 @@
-# Wavevision Sprites Constants Generator Plugin
+<p align="center"><a href="https://github.com/wavevision"><img alt="Wavevision s.r.o." src="https://wavevision.com/images/wavevision-logo.png" width="120" /></a></p>
+<h1 align="center">Sprites Constants Generator Plugin</h1>
 
 [![Build Status](https://travis-ci.org/wavevision/sprites-constants-generator-plugin.svg?branch=master)](https://travis-ci.org/wavevision/sprites-constants-generator-plugin)
 [![Coverage Status](https://coveralls.io/repos/github/wavevision/sprites-constants-generator-plugin/badge.svg?branch=master)](https://coveralls.io/github/wavevision/sprites-constants-generator-plugin?branch=master)
