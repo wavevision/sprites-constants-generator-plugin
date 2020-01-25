@@ -1,3 +1,5 @@
+export type Assets = Record<string, { source: () => string }>;
+
 export interface Options {
   ignoreErrors?: boolean;
   namespace: string;

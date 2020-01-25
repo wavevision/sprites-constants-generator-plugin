@@ -11,7 +11,7 @@ const images = 'images';
 const sprites = ['icons'];
 const test = 'test';
 
-export const makeConfig = (withError = false): Configuration => ({
+const config: Configuration = {
   mode: 'production',
   entry: {
     index: ENTRY,
@@ -56,14 +56,12 @@ export const makeConfig = (withError = false): Configuration => ({
       namespace: 'App\\Sprites',
       output: SPRITES_DIR,
       replace: sprite => `${sprite}-`,
-      sprites: sprites.map(s =>
-        withError ? `${images}/${s}.svg` : `${images}/${test}-${s}.svg`,
-      ),
+      sprites: sprites.map(s => `${images}/${test}-${s}.svg`),
     }),
   ],
   resolve: {
     extensions: ['.js', '.ts'],
   },
-});
+};
 
-export default makeConfig();
+export default config;

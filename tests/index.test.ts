@@ -2,7 +2,6 @@ import { rmdirSync } from 'fs';
 
 import assert from './index/assert';
 import compile from './index/compile';
-import error from './index/error';
 import { OUTPUT_PATH, SPRITES_DIR } from './constants';
 
 jest.setTimeout(10000);
@@ -15,5 +14,4 @@ describe('SpritesConstantsGeneratorPlugin', () => {
   });
   compile();
   assert();
-  error();
 });

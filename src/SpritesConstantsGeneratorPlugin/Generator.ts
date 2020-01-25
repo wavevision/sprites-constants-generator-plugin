@@ -1,27 +1,20 @@
-import { readFileSync } from 'fs';
-import { basename, resolve as resolvePath } from 'path';
-import { resolve as resolveUrl } from 'url';
+import { basename } from 'path';
 
 import $ from 'cheerio';
 
-import PathManager from './PathManager';
-import fetch from './fetch';
 import makeFile from './makeFile';
 import { filterClassName } from './utils';
-import { Options } from './types';
+import { Assets, Options } from './types';
 
 class Generator {
-  public constructor(options: Options, pathManager: PathManager) {
+  public constructor(options: Options) {
     this.options = options;
-    this.pathManager = pathManager;
   }
 
   private readonly options: Options;
 
-  private readonly pathManager: PathManager;
-
-  public readonly run = async (): Promise<string[]> => {
-    const messages: Array<Promise<string>> = [];
+  public readonly run = (sprites: Assets): string[] => {
+    const messages: string[] = [];
     messages.push(
       makeFile(
         'Sprites',
@@ -33,23 +26,13 @@ class Generator {
       ),
     );
     for (const sprite of this.options.sprites) {
-      messages.push(this.makeSpriteFile(sprite));
+      messages.push(this.makeSpriteFile(sprite, sprites[sprite].source()));
     }
-    return Promise.all(messages);
+    return messages;
   };
 
   private readonly getSpriteName = (sprite: string): string =>
     basename(sprite, '.svg');
-
-  private readonly getSpriteContent = async (
-    sprite: string,
-  ): Promise<string> => {
-    const path = this.pathManager.getOutputPath();
-    if (this.pathManager.isDevServer()) {
-      return fetch(resolveUrl(path, sprite));
-    }
-    return readFileSync(resolvePath(path, sprite)).toString();
-  };
 
   private readonly handleReplace = (sprite: string, value: string): string => {
     if (typeof this.options.replace === 'function') {
@@ -61,9 +44,11 @@ class Generator {
   private readonly makeConstantName = (value: string): string =>
     value.replace(/-/g, '_').toUpperCase();
 
-  private readonly makeSpriteFile = async (sprite: string): Promise<string> => {
-    const content = await this.getSpriteContent(sprite);
-    const $content = $.load(content);
+  private readonly makeSpriteFile = (
+    sprite: string,
+    source: string,
+  ): string => {
+    const $content = $.load(source);
     const baseName = this.getSpriteName(sprite);
     const className = filterClassName(baseName);
     const constants: Array<{ name: string; value: string }> = [];

@@ -10,11 +10,11 @@ const template = compile(
   fs.readFileSync(path.resolve(__dirname, '..', 'template.hbs')).toString(),
 );
 
-const makeFile = async (
+const makeFile = (
   className: string,
   constants: Array<{ name: string; value: string }>,
   options: Options,
-): Promise<string> => {
+): string => {
   const { namespace, output, useStaticClass, useStrictTypes } = options;
   if (!fs.existsSync(output)) {
     fs.mkdirSync(output, { recursive: true });
