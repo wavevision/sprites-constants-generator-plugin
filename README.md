@@ -73,7 +73,7 @@ export default {
     new SpritesConstantsGeneratorPlugin({
       namespace: 'App\\UI\\Sprites',
       output: resolve(__dirname, 'src', 'App', 'UI', 'Sprites'),
-      replace: sprite => `${sprite}-`,
+      replace: sprite => [`${sprite}-`, ''],
       sprites: sprites.map(s => `${images}/${s}.svg`),
     }),
   ],
@@ -99,9 +99,14 @@ PHP namespace in which the generated classes will reside.
 
 Absolute path to directory in which the generated classes will be put.
 
-#### `replace?: (sprite: string) => RegExp | string`
+#### `replace?: (sprite: string) => [RegExp | string, string]`
 
-Optional function whose return value will be replaced with empty string in constant name. This is useful if you want to omit something in the name.
+Optional sprite name replacer function. Return a tuple in which:
+
+- the first element is a search value
+- the second element is a replacement
+
+Replaces custom parts of sprite name **before** it is used in generated constants.
 
 ##### Example
 

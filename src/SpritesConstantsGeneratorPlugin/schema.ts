@@ -21,7 +21,7 @@ const schema = {
     replace: {
       default: undefined,
       description:
-        'Function returning pattern to replace with empty string in constant name.',
+        'Function returning [searchValue, replacement] tuple to replace custom parts in sprite names.',
       instanceOf: 'Function',
     },
     sprites: {

@@ -4,7 +4,7 @@ export interface Options {
   ignoreErrors?: boolean;
   namespace: string;
   output: string;
-  replace?: (sprite: string) => RegExp | string;
+  replace?: (symbol: string) => [RegExp | string, string];
   sprites: string[];
   useStaticClass?: boolean;
   useStrictTypes?: boolean;

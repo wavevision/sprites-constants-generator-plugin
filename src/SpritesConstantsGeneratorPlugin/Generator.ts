@@ -36,7 +36,8 @@ class Generator {
 
   private readonly handleReplace = (sprite: string, value: string): string => {
     if (typeof this.options.replace === 'function') {
-      return value.replace(this.options.replace(sprite), '');
+      const [search, replace] = this.options.replace(sprite);
+      return value.replace(search, replace);
     }
     return value;
   };

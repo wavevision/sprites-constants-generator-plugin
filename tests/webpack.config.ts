@@ -55,7 +55,7 @@ const config: Configuration = {
     new SpritesConstantsGeneratorPlugin({
       namespace: 'App\\Sprites',
       output: SPRITES_DIR,
-      replace: sprite => `${sprite}-`,
+      replace: sprite => [`${sprite}-`, ''],
       sprites: sprites.map(s => `${images}/${test}-${s}.svg`),
     }),
   ],
