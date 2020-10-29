@@ -54,7 +54,7 @@ class Generator {
     const className = filterClassName(baseName);
     const constants: Array<{ name: string; value: string }> = [];
     $content('svg defs symbol').each(
-      (index: number, element: CheerioElement) => {
+      (index: number, element: cheerio.Element) => {
         const value = $(element).attr('id');
         if (!value) {
           throw new Error('SVG symbol ID is missing.');
