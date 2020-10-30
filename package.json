@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/wavevision/sprites-constants-generator-plugin",
   "dependencies": {
-    "@wavevision/ts-utils": "^0.4.3",
+    "@wavevision/ts-utils": "^1.0.0",
     "cheerio": "^1.0.0-rc.3",
     "handlebars": "^4.5.1",
     "json-schema": "^0.2.5",
