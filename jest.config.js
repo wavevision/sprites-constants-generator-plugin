@@ -1,9 +1,5 @@
 module.exports = {
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-    },
-  },
+  cacheDirectory: '<rootDir>/temp/cache/jest',
   testEnvironment: 'node',
   testMatch: ['<rootDir>/tests/**/*.test.ts'],
   testPathIgnorePatterns: ['<rootDir>/node_modules'],
@@ -18,4 +14,9 @@ module.exports = {
     '!**/node_modules/**',
   ],
   preset: 'ts-jest',
+  globals: {
+    'ts-jest': {
+      isolatedModules: true,
+    },
+  },
 };
