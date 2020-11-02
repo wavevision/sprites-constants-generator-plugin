@@ -68,7 +68,7 @@
     "eslint": "eslint src tests --cache --ext .ts",
     "eslint-fix": "yarn eslint --fix",
     "fix": "run-s ts-check eslint-fix prettier-fix test",
-    "postversion": "run-s postversion-push:tags postversion-publish postversion-push postversion--cho",
+    "postversion": "run-s postversion-push:tags postversion-publish postversion-push postversion-echo",
     "postversion-echo": "echo \"Successfully released version $npm_package_version!\"",
     "postversion-publish": "yarn publish --access public --new-version $npm_package_version",
     "postversion-push": "git push",
