@@ -9,5 +9,5 @@
     "resolveJsonModule": false,
     "target": "es5"
   },
-  "include": ["./*.js/", "./src/**/*", "./tests/**/*"]
+  "include": ["./*.js/", "./.eslintrc.js", "./src/**/*", "./tests/**/*"]
 }

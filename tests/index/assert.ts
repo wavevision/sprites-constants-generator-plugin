@@ -12,10 +12,9 @@ const assertStaticClass = (source: string): void =>
 const assertStrictTypes = (source: string): void =>
   expect(source.includes('<?php declare (strict_types = 1);')).toBe(true);
 
-// eslint-disable-next-line jest/no-export
 export default (): void => {
   it('generated valid constants classes', () =>
-    new Promise(done => {
+    new Promise<void>(done => {
       const iconsPath = resolve(SPRITES_DIR, 'TestIcons.php');
       const spritesPath = resolve(SPRITES_DIR, 'Sprites.php');
       expect(existsSync(spritesPath)).toBe(true);
